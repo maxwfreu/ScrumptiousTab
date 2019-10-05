@@ -1,0 +1,41 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        "@babel/preset-env",
+        "@babel/react"
+      ],
+      "plugins": [
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-proposal-class-properties"
+      ]
+    },
+    "production": {
+      "presets": [
+        "@babel/preset-env",
+        "@babel/react"
+      ],
+      "plugins": [
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-proposal-class-properties"
+      ]
+    },
+    "test": {
+      "presets": [
+        "@babel/preset-env",
+        "@babel/react"
+      ],
+      "plugins": [
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-proposal-class-properties",
+        "transform-dynamic-import",
+        [
+          "@babel/plugin-transform-runtime",
+          {
+            "regenerator": true
+          }
+        ]
+      ]
+    }
+  }
+}

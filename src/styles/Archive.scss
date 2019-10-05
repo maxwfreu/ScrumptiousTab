@@ -1,0 +1,111 @@
+.archive-panel {
+  padding: 40px 24px 8px 24px;
+
+  &.closed {
+    overflow-y: auto;
+    right: calc(-350px - 48px);
+  }
+
+  &.opened {
+    right: 0;
+  }
+
+  .card-wrapper {
+    width: calc(100% - 40px);
+  }
+
+  .archive-date {
+    border-bottom: 1px solid #A4B0BE;
+    color: #A4B0BE;
+    font-family: "Hind Madurai";
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 22px;
+    margin-top: 24px;
+  }
+
+  .card-wrapper,
+  .card-wrapper.not-editing:hover {
+    background-color: #FFFFFF;
+    cursor: default;
+
+    .card-content {
+      &.with-overlay {
+        &::after {
+          background: linear-gradient(180deg, rgba(255, 255, 255,0) 0%, #fff 130%);
+        }
+      }
+    }
+  }
+}
+
+.with-bookmarks .archive-panel {
+  height: calc(100vh - 81px);
+  top: 33px;
+}
+
+.archive-panel-card-wrapper {
+  margin-bottom: 8px;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: #A4B0BE;
+    border-radius: 10px;
+  }
+}
+
+.archive-toggle-button {
+  background-color: #4f6791;
+  border: none;
+  color: white;
+  cursor: pointer;
+  height: 50px;
+  left: -53px;
+  position: absolute;
+  top: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.closed .archive-toggle-button {
+  font-size: 16px;
+  font-weight: bold;
+  left: 0;
+  position: relative;
+}
+
+.archive-panel-title {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .archive-button {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+.archive-panel-name {
+  align-items: center;
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  justify-content: center;
+  line-height: 22px;
+}
+
+.archive-empty {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

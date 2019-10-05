@@ -1,0 +1,105 @@
+$light-bg-color: #eff3f8;
+$gray-color: #A4B0BE;
+
+@mixin btn-border-outline($color: #ccc, $hover: #000, $width: 2px, $vertical: top, $horizontal: left, $direction: horizontal, $duration: .15s) {
+  $h-side: if($horizontal == 'left', 'right', 'left');
+  $v-side: if($vertical == 'top', 'bottom', 'top');
+
+  $dir-1: 'height';
+  $dir-2: 'width';
+  $pseudo-1: 'after';
+  $pseudo-2: 'before';
+
+  @if($direction == 'horizontal') {
+    $dir-1: 'width';
+    $dir-2: 'height';
+    $pseudo-1: 'before';
+    $pseudo-2: 'after';
+  }
+  border-radius: 10px;
+
+  position: relative;
+
+  &::before,
+  &::after {
+    border: 0 solid transparent;
+    border-radius: 10px;
+    box-sizing: border-box;
+    content: '';
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+  }
+
+  &::before {
+    #{$vertical}: 0;
+    #{$horizontal}: 0;
+  }
+
+  &::after {
+    #{$h-side}: 0;
+    #{$v-side}: 0;
+  }
+
+  &::#{$pseudo-1} {
+    border-#{$vertical}-width: $width;
+    border-#{$h-side}-width: $width;
+  }
+
+  &::#{$pseudo-2} {
+    border-#{$v-side}-width: $width;
+    border-#{$horizontal}-width: $width;
+  }
+
+  &.done {
+    &::before {
+      animation: grow .25s ease;
+      background-image: url('../images/card/check.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 14px 14px;
+      border: 0;
+      border-radius: 0;
+      content: '';
+      height: 14px;
+      left: 5px;
+      margin: 0;
+      position: absolute;
+      top: 5px;
+      width: 14px;
+    }
+  }
+
+  &.animate {
+    border-radius: 10px;
+    transition: border-color $duration;
+    transition-delay: $duration * 4;
+
+    &::before,
+    &::after {
+      border-color: $hover;
+      height: 100%;
+      transition: border-color .5s, unquote($dir-1) $duration,  unquote($dir-2) $duration;
+      width: 100%;
+    }
+
+    &::before { transition-delay: 0s, 0s, $duration; }
+    &::after { transition-delay: $duration * 2, $duration * 2, $duration * 3; }
+  }
+}
+
+@keyframes grow {
+  0% {
+    height: 0;
+    opacity: 0;
+    width: 0;
+  }
+
+  100% {
+    height: 15px;
+    opacity: 1;
+    width: 15px;
+  }
+}

@@ -1,0 +1,617 @@
+@import 'Constants';
+
+.card-wrapper {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  margin-top: 12px;
+  outline: none;
+  padding: 20px;
+  position: relative;
+  width: calc(100% - 40px);
+
+  &.no-initial-animation{
+    &::before {
+      background-image: url('../images/card/check.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 14px 14px;
+      border: 0;
+      content: '';
+      height: 14px;
+      left: 6px;
+      margin: 0;
+      position: absolute;
+      top: 5px;
+      width: 14px;
+    }
+  }
+
+  &.draw-outline:not(.no-initial-animation) {
+    @include btn-border-outline(#71CA58, #90f183, 2px, top, left, horizontal);
+  }
+
+  &.is-editing-card {
+    border: 1px solid #A4B0BE;
+    z-index: 9999;
+  }
+
+  &.not-editing .card-content {
+    cursor: pointer;
+  }
+
+  &.not-editing:hover {
+    background-color: rgb(228, 236, 245);
+    cursor: pointer;
+
+    .card-content {
+      &.with-overlay {
+        &::after {
+          background: linear-gradient(180deg, rgba(228,236,245, 0) 0%, #e4ecf5 130%);
+        }
+      }
+    }
+  }
+}
+
+.card {
+  cursor: text;
+  text-align: left;
+  transition: margin .5s ease;
+}
+
+.empty-card {
+  display: flex;
+  flex-direction: column;
+
+  .placeholder {
+    color: #A4B0BE;
+    font-size: 16px;
+  }
+}
+
+
+.placeholder{
+  &.card-content {
+    color: #A4B0BE;
+    overflow: hidden;
+
+    span {
+      color: #A4B0BE !important;
+      opacity: 1 !important;
+    }
+  }
+}
+
+.card-content {
+  background-color: transparent;
+  border: none;
+  font-family: 'Hind Madurai', sans-serif;
+  font-size: 16px;
+  line-height: 21px;
+  margin: 0;
+  resize: none;
+  white-space: pre-wrap;
+  width: 100%;
+  word-break: break-word;
+
+  &::placeholder {
+    color: #A4B0BE;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.with-overlay {
+    margin-bottom: 40px;
+    max-height: 250px;
+    overflow: hidden;
+
+    &::after {
+      background: linear-gradient(180deg, rgba(255, 255, 255,0) 0%, #fff 100%);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      bottom: 0;
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+  &.with-closed-overlay {
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  a {
+    color: #12A4FF !important;
+  }
+
+  h1 {
+    line-height: 35px;
+  }
+
+  .with-overlay-close-container,
+  .with-overlay-expand-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 281px;
+    width: 100%;
+    z-index: 999;
+
+    button {
+      background: none;
+      border: none;
+      color: #A4B0BE;
+      cursor: pointer;
+      font-family: 'Hind Madurai';
+      font-size: 13px;
+      font-weight: bold;
+      line-height: 18px;
+      outline: none;
+      padding: 0;
+
+      &:hover,
+      &:active {
+        color: #333;
+      }
+    }
+  }
+
+  .with-overlay-close-container {
+    bottom: -29px;
+    top: unset;
+  }
+}
+
+.card-options-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-options-inner {
+  border-top: 2px solid $light-bg-color;
+  cursor: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 19px;
+  padding-top: 10px;;
+  width: 100%;
+}
+
+.card-options-inner-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  .demo-priority {
+    margin-bottom: 8px;
+    margin-left: 8px;
+  }
+}
+
+.card-option-bottom-row {
+  display: flex;
+  justify-content: space-between;
+   margin-top: 6px;
+}
+
+.disabled-card-wrapper {
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.edit-button {
+  background-image: url('../images/icons/edit-2x.png');
+  background-size: 100%;
+  height: 19px;
+  width: 19px;
+
+  &:active,
+  &:hover {
+    background-image: url('../images/icons/edit-active-2x.png');
+  }
+}
+
+.delete-button {
+  background-image: url('../images/icons/delete-2x.png');
+  background-size: 14px 19px;
+  height: 19px;
+  position: relative;
+  width: 14px;
+
+  &:active,
+  &:hover {
+    background-image: url('../images/icons/delete-active-2x.png');
+  }
+
+  &.delete-button-confirm:active:before,
+  &.delete-button-confirm:hover:before {
+    bottom: 1px;
+    color: #EC1A45;
+    content: 'Are you sure?';
+    font-size: 13px;
+    left: 25px;
+    position: absolute;
+    text-align: left;
+    width: 90px;
+  }
+}
+
+.delete-button,
+.edit-button {
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  color: white;
+  cursor: pointer;
+  float: right;
+}
+
+.delete-button:focus,
+.edit-button:focus {
+  border: none;
+  outline: none;
+}
+
+.card-options-inner-not-editing {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-top: 8px;
+
+  .demo-priority {
+    margin-bottom: 8px;
+    margin-left: 8px;
+  }
+}
+
+.card-number {
+  color: #A4B0BE;
+  font-size: 12px;
+  position: absolute;
+  right: 8px;
+  text-align: center;
+  top: 8px;
+}
+
+.done.card-number {
+  right: 30px;
+}
+
+.demo-priority {
+  background-color: #12A4FF;
+  border: 0;
+  border-radius: 16.5px;
+  color: white;
+  cursor: auto;
+  display: flex;
+  font-size: 13px;
+  font-weight: 500;
+  height: 25px;
+  line-height: 26px;
+  max-width: 90%;
+  padding-left: 8px;
+  padding-right: 8px;
+
+  p {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.demo-priority.editable:not(.focused) {
+  cursor: pointer;
+}
+
+.demo-priority.editable:not(.focused)::placeholder {
+  color: white;
+}
+
+.demo-priority:focus {
+  outline: none;
+}
+
+.demo-priority.editable {
+  max-width: 110px;
+}
+
+.demo-priority.focused {
+  background-color: white !important;
+  border: 1px solid #A4B0BE;
+  border-radius: 3px;
+  color: black !important;
+  cursor: text;
+}
+
+.remove-label {
+  background-color: transparent;
+  background-image: url('../images/icons/x-white-2x.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 8px;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  margin-left: 5px;
+  outline: none;
+  width: 10px;
+}
+
+.color-option {
+  border-radius: 10px;
+  cursor: pointer;
+  height: 10px;
+  width: 10px;
+}
+
+.color-option.selected {
+  background-image: url('../images/icons/check-white-2x.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 7px;
+}
+
+.pick-label {
+  background-color: #FFFFFF;
+  border: 1px solid #A4B0BE; 
+  border-radius: 16.5px;
+  color: #A4B0BE;
+  font-family: "Hind Madurai";
+  font-size: 13px;
+  font-weight: 500;
+  height: 25px;
+  line-height: 22px;
+}
+
+.pick-label:hover,
+.pick-label:active,
+.pick-label:focus {
+  border-color: black;
+  color: black;
+  cursor: pointer;
+  outline: none;
+}
+
+.pick-label-wrapper {
+  background-color: #FFFFFF;
+  border: 1px solid #A4B0BE;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  margin-top: 4px;
+  max-width: 241px;
+  padding: 15px;
+  position: absolute;
+  right: 20px;
+  width: calc(100% - 50px);
+  z-index: 9999;
+}
+
+.pick-label-item {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.pick-label-item-row {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.pick-label-item-row.focused {
+  margin-bottom: 20px;
+}
+
+.pick-label-item-row.hover-icons {
+  justify-content: space-between;
+  padding-left: 10px;
+  width: 100%;
+
+
+  .hover-icons-focused {
+    margin-bottom: 20px;
+  }
+}
+
+.pick-label-input-row {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.pick-label-item .label-select {
+  background-color: #FFFFFF;
+  border: 1.5px solid #A4B0BE;
+  border-radius: 17px;
+  cursor: pointer;
+  height: 17px;
+  margin-right: 15px;
+  width: 17px;
+}
+
+.pick-label-item .label-select.selected {
+  background-image: url('../images/icons/check-black-2x.png');
+  background-position-x: center;
+  background-position-y: 4.5px;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  border-color: black;
+}
+
+.pick-label-options {
+  border-top: 1px solid $light-bg-color;
+  padding-top: 8px;
+}
+
+.pick-label-color-row {
+  display: flex;
+  height: 10px;
+  justify-content: space-around;
+  margin-top: 11px;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+}
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.add-new-label-button {
+  background-color: transparent;
+  border: none;
+  color: #A4B0BE;
+  cursor: pointer;
+  font-family: "Hind Madurai";
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  padding: 0;
+}
+
+.add-new-label-button:hover,
+.add-new-label-button:active {
+  color: black;
+}
+.add-new-label-button:focus {
+  outline: none;
+}
+
+
+.card-archive-button {
+  background-color: transparent;
+  background-image: url('../images/icons/archive-2x.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border: 0;
+  cursor: pointer;
+  height: 10.37px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 14.98px;
+  z-index: 100;
+}
+
+.card-archive-button:active:before,
+.card-archive-button:hover:before {
+  color: black;
+  content: 'Archive';
+  position: absolute;
+  right: 20px;
+  top: -3px;
+}
+.card-archive-button:focus {
+  outline: none;
+}
+
+.card-archive-button:active,
+.card-archive-button:hover {
+  background-image: url('../images/icons/archive-active-2x.png');
+}
+
+.restore-card-button {
+  background: transparent;
+  border: none;
+  color: #A4B0BE;
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 100;
+}
+
+.restore-card-button:hover,
+.restore-card-button:active {
+  color: #333;
+}
+
+.restore-card-button:focus {
+  outline: none;
+}
+
+.hover-delete-btn {
+  background-color: transparent;
+  background-image: url('../images/icons/delete-2x.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 9px 12px;
+  border: 0;
+  bottom: 4px;
+  display: none;
+  height: 25px;
+  left: 4px;
+  position: absolute;
+  width: 25px;
+
+  &:active:before,
+  &:hover:before {
+    bottom: 6px;
+    color: #EC1A45;
+    content: 'Delete';
+    font-size: 11px;
+    left: 25px;
+    position: absolute;
+    text-align: left;
+    width: 90px;
+  }
+
+  &.confirm-delete-hover:active:before,
+  &.confirm-delete-hover:hover:before, {
+    content: 'Are you sure?';
+  }
+}
+
+.card-wrapper:hover .hover-delete-btn {
+  display: block
+}
+
+.hover-delete-btn:active,
+.hover-delete-btn:hover {
+  background-image: url('../images/icons/delete-active-2x.png');
+  cursor: pointer;
+  outline: none;
+}
+
+/* block quote */
+blockquote {
+  background: $light-bg-color;
+  border-left: 5px solid #A4B0BE;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+}
+
+blockquote p {
+  display: inline;
+}
+
+/* code */
+
+pre {
+  margin: 0 !important;
+  padding: 5px !important;
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+}

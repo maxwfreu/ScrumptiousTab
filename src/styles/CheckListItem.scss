@@ -1,0 +1,21 @@
+.check-list-item-wrapper {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+
+  & + & {
+    margin-top: 0;
+  }
+}
+
+.check-box-item-wrapper {
+  margin-right: 0.75em;
+}
+
+.check-list-content-wrapper {
+  flex: 1;
+
+  &:focus {
+    outline: none;
+  }
+}
