@@ -1,10 +1,10 @@
 {
   "short_name": "Scrumptious",
-  "name": "Scrumptious",
+  "name": "Scrumptious: To-Do List & Kanban Task Manager",
   "version": "1.2.0.8",
   "manifest_version": 2,
   "chrome_url_overrides" : {
-    "newtab": "index.html" 
+    "newtab": "index.html"
   },
   "description": "A kanban board for your new tab.",
   "icons": {
