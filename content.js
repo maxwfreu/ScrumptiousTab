@@ -36,7 +36,6 @@ if (chromeUtil.bookmarks) {
   chromeUtil.bookmarks.onChanged.addListener(saveBookMarks);
 }
 
-// Check whether new version is installed
 if (chromeUtil) {
   chromeUtil.runtime.onInstalled.addListener(saveBookMarks);
   const manifest = chromeUtil.runtime.getManifest();
@@ -45,6 +44,14 @@ if (chromeUtil) {
   }
 
   chromeUtil.browserAction.onClicked.addListener(() => {
-    window.open(`chrome-extension://${chromeUtil.runtime.id}/index.html#0`);
+    // Browser is defined for firefox extensions
+    if (typeof browser !== 'undefined') {
+      const url = browser.extension.getURL('');
+      chrome.tabs.create({
+        url: `${url}index.html#0`,
+      });
+    } else {
+      window.open(`chrome-extension://${chrome.runtime.id}/index.html#0`);
+    }
   });
 }
