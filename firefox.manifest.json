@@ -1,10 +1,10 @@
 {
   "short_name": "Scrumptious",
   "name": "Scrumptious",
-  "version": "1.1.1.5",
+  "version": "1.2.0.8",
   "manifest_version": 2,
   "chrome_url_overrides" : {
-    "newtab": "index.html"
+    "newtab": "index.html" 
   },
   "description": "A kanban board for your new tab.",
   "icons": {
@@ -19,6 +19,8 @@
     "scripts": ["content.js"]
   },
   "permissions": [
+    "storage",
+    "unlimitedStorage",
     "chrome://favicon/"
   ],
   "optional_permissions": [
