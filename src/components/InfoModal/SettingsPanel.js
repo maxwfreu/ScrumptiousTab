@@ -7,12 +7,6 @@ import { toggleWobble, toggleBookMarks as toggleBookMarksAction, toggleWelcomeBa
 import { logEvent, initalizeBookMarks, getBooleanFromLocalStorage } from '../../utils';
 import 'react-toggle/style.css';
 
-let chromeUtil = null;
-if (typeof chrome !== 'undefined' && chrome !== null && chrome.storage) {
-  chromeUtil = chrome;
-}
-
-
 class SettingsPanel extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -27,7 +21,6 @@ class SettingsPanel extends React.PureComponent {
     this.askForPermissions = this.askForPermissions.bind(this);
     this.handleBookMarkPress = this.handleBookMarkPress.bind(this);
     this.toggleDefaultTab = this.toggleDefaultTab.bind(this);
-    this.askForTabPermissions = this.askForTabPermissions.bind(this);
     this.handleTabPress = this.handleTabPress.bind(this);
   }
 
@@ -84,11 +77,11 @@ class SettingsPanel extends React.PureComponent {
   }
 
   askForPermissions() {
-    if (!chromeUtil || !chromeUtil.permissions) {
+    if (!chrome || !chrome.permissions) {
       this.props.toggleBookMarksAction(false);
       return;
     }
-    chromeUtil.permissions.request({
+    chrome.permissions.request({
       permissions: ['bookmarks'],
     }, (granted) => {
       if (granted) {
@@ -100,16 +93,8 @@ class SettingsPanel extends React.PureComponent {
     });
   }
 
-  askForTabPermissions() {
-    if (!chromeUtil || !chromeUtil.permissions) {
-      this.props.hideScrumptious(false);
-      return;
-    }
-    this.toggleDefaultTab(true);
-  }
-
   handleBookMarkPress(e) {
-    if (!chromeUtil || !chromeUtil.permissions) {
+    if (!chrome || !chrome.permissions) {
       this.props.toggleBookMarksAction(false);
       this.setState({
         oops: true,
@@ -117,7 +102,7 @@ class SettingsPanel extends React.PureComponent {
       return;
     }
     e.persist();
-    chromeUtil.permissions.contains({ permissions: ['bookmarks'] }, (result) => {
+    chrome.permissions.contains({ permissions: ['bookmarks'] }, (result) => {
       if (result) {
         this.toggleBookMark(e.target.checked);
       } else {
@@ -127,7 +112,7 @@ class SettingsPanel extends React.PureComponent {
   }
 
   handleTabPress(e) {
-    if (!chromeUtil || !chromeUtil.permissions) {
+    if (!chrome || !chrome.permissions) {
       this.props.toggleScrumptious(false);
       this.setState({
         oops: true,
@@ -176,7 +161,7 @@ class SettingsPanel extends React.PureComponent {
             onChange={this.toggleWelcomeBanner}
           />
         </div>
-        <div className={`info-title ${process.env.FIREFOX ? '' : 'not-delicious'}`}>
+        <div className="info-title not-delicious">
           Card Wobble
           <Toggle
             defaultChecked={!isWobbleDisabled}
@@ -187,17 +172,21 @@ class SettingsPanel extends React.PureComponent {
         <p>
           Turn on for a natural movement when you drag your tasks from column to column
         </p>
-        <div className="info-title not-delicious">
-          Default New Tab
-          <Toggle
-            defaultChecked={hideScrumptious}
-            icons={false}
-            onChange={this.handleTabPress}
-          />
-        </div>
-        <p>
-          Turn on to get back your new tab. Access your Kanban board by clicking on the Scrumptious icon in your extensions toolbar
-        </p>
+        {!process.env.FIREFOX && (
+          <React.Fragment>
+            <div className="info-title not-delicious">
+              Default New Tab
+              <Toggle
+                defaultChecked={hideScrumptious}
+                icons={false}
+                onChange={this.handleTabPress}
+              />
+            </div>
+            <p>
+              Turn on to get back your new tab. Access your Kanban board by clicking on the Scrumptious icon in your extensions toolbar
+            </p>
+          </React.Fragment>
+        )}
         <div className="info-title-subsection settings-subsection">
           <div className="subsection-header">
             More Coming Soon

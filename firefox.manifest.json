@@ -1,7 +1,7 @@
 {
   "short_name": "Scrumptious",
-  "name": "Scrumptious",
-  "version": "1.1.1.5",
+  "name": "Scrumptious: To-Do List & Kanban Task Manager",
+  "version": "1.2.0.8",
   "manifest_version": 2,
   "chrome_url_overrides" : {
     "newtab": "index.html"
@@ -19,6 +19,8 @@
     "scripts": ["content.js"]
   },
   "permissions": [
+    "storage",
+    "unlimitedStorage",
     "chrome://favicon/"
   ],
   "optional_permissions": [
