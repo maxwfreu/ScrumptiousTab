@@ -26,8 +26,6 @@ import {
 } from '../Actions';
 import CardEditor from './CardEditor';
 import {
-  logEvent,
-  logException,
   clearSelection,
   didChange,
 } from '../../utils';
@@ -126,10 +124,6 @@ class Card extends Component {
     this.labelRef = node;
   }
 
-  componentDidCatch(error) {
-    logException('Card Crashed');
-  }
-
   handleClickOutside(event) {
     const { pickLabel, isDeleteConfirmed } = this.state;
     const { editingId, taskId } = this.props;
@@ -167,7 +161,6 @@ class Card extends Component {
 
 
   startEditing(e) {
-    logEvent('tasks', 'Edit Task');
     const { isArchived, taskId, editingId } = this.props;
     const isEditing = taskId === editingId;
     if (isEditing || isArchived) return;
@@ -196,7 +189,6 @@ class Card extends Component {
     const timeoutDelay = 300;
     setTimeout(() => {
       const { type, taskId } = this.props;
-      logEvent('tasks', 'Restore Task');
       this.props.restoreTask(type, taskId);
     }, timeoutDelay);
     if (timeoutDelay !== 0) {
@@ -218,7 +210,6 @@ class Card extends Component {
     }
     setTimeout(() => {
       const { type, taskId } = this.props;
-      logEvent('tasks', 'Delete Task');
       this.props.deleteTask(type, taskId);
     }, timeoutDelay);
     if (timeoutDelay !== 0) {
@@ -238,7 +229,6 @@ class Card extends Component {
     if (this.isContentEmpty()) return;
     setTimeout(() => {
       const { hasSeenArchive, type, taskId } = this.props;
-      logEvent('archive', 'Archive Task');
       this.props.archiveTask(type, taskId);
       if (!hasSeenArchive) {
         this.props.toggleInfoModal(false, 1);
@@ -252,20 +242,17 @@ class Card extends Component {
   }
 
   selectLabel() {
-    logEvent('tasks', 'Show Labels');
     this.setState({
       pickLabel: true,
     });
   }
 
   toggleLabel(value) {
-    logEvent('tasks', 'Toggle Label');
     const { type, taskId } = this.props;
     this.props.setLabels(type, taskId, value);
   }
 
   addLabel() {
-    logEvent('tasks', 'Add Label');
     const { type, taskId } = this.props;
     this.props.addLabel(type, taskId);
   }

@@ -4,7 +4,6 @@ import posed from 'react-pose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import loadable from '@loadable/component';
-import { logEvent } from '../../utils';
 import {
   toggleInfoModal as toggleInfoModalAction,
 } from '../Actions';
@@ -81,32 +80,26 @@ class InfoModal extends PureComponent {
   */
   showInfo() {
     const { toggleInfoModal } = this.props;
-    logEvent('click', 'Show Info');
     toggleInfoModal(false);
   }
 
   openAppModePanel() {
-    logEvent('Info Panel', 'App Mode');
     this.setState({ activeTab: 0 });
   }
 
   openArchivePanel() {
-    logEvent('Info Panel', 'Archive');
     this.setState({ activeTab: 1 });
   }
 
   openShortcutPanel() {
-    logEvent('Info Panel', 'Shortcuts');
     this.setState({ activeTab: 2 });
   }
 
   openSettingsPanel() {
-    logEvent('Info Panel', 'Settings');
     this.setState({ activeTab: 3 });
   }
 
   openSuggestionsPanel() {
-    logEvent('Info Panel', 'Suggestions');
     this.setState({ activeTab: 4 });
   }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logEvent } from '../../../utils';
 import { setAppMode, setBackgroundMode } from '../../Actions';
 import DragAndDrop from '../DragAndDrop';
 import SurpriseMeImage from './SurpriseMeImage';
@@ -18,16 +17,10 @@ class AppModePanel extends React.PureComponent {
   }
 
   updateAppMode(appMode) {
-    logEvent('settings', `Update AppMode: ${appMode}`);
     this.props.setAppMode(appMode);
   }
 
   updateBackgroundMode(backgroundMode) {
-    if (backgroundMode === 0) {
-      logEvent('settings', 'Update Background: Scrumptious');
-    } else {
-      logEvent('settings', 'Update Background: Custom');
-    }
     this.props.setBackgroundMode(backgroundMode);
   }
 

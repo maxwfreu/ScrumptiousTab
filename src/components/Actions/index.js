@@ -1,6 +1,4 @@
-import ReactGA from 'react-ga';
 import ScrumptiousConstants from '../ScrumptiousConstants';
-import { logException, logEvent } from '../../utils';
 
 export const updateName = name => (
   (dispatch) => {

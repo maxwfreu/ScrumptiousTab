@@ -6,7 +6,6 @@ import {
   initialTaskMapping,
   initialTasks,
   getBooleanFromLocalStorage,
-  logException,
 } from '../../utils';
 
 const LZString = require('lz-string');
@@ -32,7 +31,6 @@ export const setChromeStorageData = obj => (
       });
     } catch (err) {
       reject(err);
-      logException('Failed to set chrome storage data');
     }
   })
 );
@@ -46,7 +44,6 @@ export const getChromeStorageData = obj => (
       });
     } catch (err) {
       reject(err);
-      logException('Failed to fetch chrome storage data');
     }
   })
 );
@@ -184,7 +181,7 @@ export const refreshTaskData = () => (
         cardNumber,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       dispatch({
         type: ScrumptiousConstants.SCRUMPTIOUS_DATA_FETCH_FAILURE,
       });
@@ -220,7 +217,7 @@ export const refreshColumnData = () => (
         columns,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       dispatch({
         type: ScrumptiousConstants.SCRUMPTIOUS_DATA_FETCH_FAILURE,
       });
@@ -248,7 +245,7 @@ export const refreshLabelData = () => (
         labelOptions,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       dispatch({
         type: ScrumptiousConstants.SCRUMPTIOUS_DATA_FETCH_FAILURE,
       });
@@ -266,7 +263,7 @@ export const saveTaskData = (taskMapping, tasks, cardNumber) => {
     store.setItem('tasks', tasks);
     store.setItem('cardNumber', cardNumber);
   } catch (err) {
-    logException(ScrumptiousConstants.TASK_DATA_SAVE_FAIL);
+    console.error(err);
   }
 };
 
@@ -274,7 +271,7 @@ export const saveColumnDataLocally = (columns, timestamp = null, saveToCache = f
   try {
     store.setItem('columns', columns);
   } catch (err) {
-    logException(ScrumptiousConstants.COLUMN_DATA_SAVE_FAIL);
+    console.error(err);
   }
 };
 
@@ -282,7 +279,7 @@ export const saveColumnData = (columns) => {
   try {
     saveColumnDataLocally(columns);
   } catch (err) {
-    logException(ScrumptiousConstants.COLUMN_DATA_SAVE_FAIL);
+    console.error(err);
   }
 };
 
@@ -290,7 +287,7 @@ export const saveLabelOptionsLocally = (labelOptions, timestamp = null, saveToCa
   try {
     store.setItem('labelOptions', labelOptions);
   } catch (err) {
-    logException(ScrumptiousConstants.LABEL_DATA_SAVE_FAIL);
+    console.error(err);
   }
 };
 
@@ -298,6 +295,6 @@ export const saveLabelOptions = (labelOptions) => {
   try {
     saveLabelOptionsLocally(labelOptions);
   } catch (err) {
-    logException(ScrumptiousConstants.LABEL_DATA_SAVE_FAIL);
+    console.error(err);
   }
 };

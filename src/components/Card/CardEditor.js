@@ -13,7 +13,6 @@ import CardExpander from './CardExpander';
 import CheckListItem from './CheckListItem';
 import { updateRichText } from '../Actions/TaskActions';
 import { hideToolbar, showToolbar } from '../Actions/ToolbarActions';
-import { logException, logEvent } from '../../utils';
 
 const DEFAULT_NODE = 'paragraph';
 
@@ -140,7 +139,6 @@ class CardEditor extends React.PureComponent {
   onClickMark(event, type) {
     event.preventDefault();
     this.editor.toggleMark(type);
-    logEvent('Task Editor', 'Toolbar Click');
   }
 
   onClickBlock(event, type) {
@@ -149,8 +147,6 @@ class CardEditor extends React.PureComponent {
     const { editor } = this;
     const { value } = editor;
     const { document } = value;
-
-    logEvent('Task Editor', 'Toolbar Click');
 
     // Handle everything but list buttons.
     if (type !== 'bulleted-list' && type !== 'numbered-list') {
@@ -304,7 +300,6 @@ class CardEditor extends React.PureComponent {
     this.setState({
       value,
     });
-    logException('Card Editor Crashed');
   }
 
   ref(editor) {
@@ -326,10 +321,8 @@ class CardEditor extends React.PureComponent {
     const { isToolbarHidden } = this.props;
     this.clickedToolbarBtn = true;
     if (isToolbarHidden) {
-      logEvent('Task Editor', 'Toolbar Show');
       this.props.showToolbar();
     } else {
-      logEvent('Task Editor', 'Toolbar Hide');
       this.props.hideToolbar();
     }
   }

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import {
   addTask as addTaskAction,
 } from './Actions/TaskActions';
-import { logEvent } from '../utils';
 
 const isAddTaskKey = isKeyHotkey('enter');
 const uuidv4 = require('uuid/v4');
@@ -38,7 +37,6 @@ class KeyBoardListener extends PureComponent {
     const { editingId, addTask, firstColID } = this.props;
     const isInput = e.target.tagName.toUpperCase() === 'INPUT';
     if (isAddTaskKey(e) && !editingId && !isInput && firstColID) {
-      logEvent('shortcut', 'Add Task');
       const id = uuidv4();
       e.stopPropagation();
       e.preventDefault();

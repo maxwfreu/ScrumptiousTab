@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { getArchiveDate, isSameDate, logEvent } from '../../utils';
+import { getArchiveDate, isSameDate } from '../../utils';
 import { clearArchive } from '../Actions/ArchiveActions';
 import EmptyState from '../EmptyState';
 import Card from '../Card';
@@ -67,7 +67,6 @@ class ArchivePanel extends Component {
     const { confirmDelete } = this.state;
     const { dispatchClearArchive } = this.props;
     if (confirmDelete) {
-      logEvent('archive', 'Clear Archive');
       dispatchClearArchive();
     }
     this.setState(prevState => ({

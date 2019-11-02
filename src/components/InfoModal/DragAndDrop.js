@@ -4,7 +4,6 @@ import Dropzone from 'react-dropzone';
 import classnames from 'classnames';
 import localforage from 'localforage';
 import imageCompression from 'browser-image-compression';
-import { logEvent, logException } from '../../utils';
 import CloudImgDark from '../../images/sidebar/cloud-dark-2x.png';
 import CloudImgLight from '../../images/sidebar/cloud-light-2x.png';
 const MAX_FILE_SIZE = 3000000; // 3MB
@@ -22,10 +21,8 @@ class DragAndDrop extends React.PureComponent {
     try {
       const compressedFile = await imageCompression(imageFile, options);
       const compressedFileSize = compressedFile.size / 1024 / 1024;
-      logEvent('File Upload', 'compressed', originalFileSize - compressedFileSize);
       return compressedFile;
     } catch (error) {
-      logException(error);
       return null;
     }
   }
@@ -87,7 +84,6 @@ class DragAndDrop extends React.PureComponent {
         });
       }
     }, 1000);
-    logEvent('File Upload', 'success');
     this.props.setBackgroundMode(isBGOne ? 9 : 10, true);
     if (process.env.DEMO_BUILD) {
       localforage.removeItem(bucket);
@@ -96,7 +92,6 @@ class DragAndDrop extends React.PureComponent {
 
   onDropOne(acceptedFiles, rejectedFiles) {
     if (rejectedFiles && rejectedFiles.length !== 0) {
-      logEvent('File Upload', 'rejected');
       this.setState({
         rejectOne: true,
       });
@@ -120,7 +115,6 @@ class DragAndDrop extends React.PureComponent {
 
   onDropTwo(acceptedFiles, rejectedFiles) {
     if (rejectedFiles && rejectedFiles.length !== 0) {
-      logEvent('File Upload', 'rejected');
       this.setState({
         rejectTwo: true,
       });
@@ -192,11 +186,6 @@ class DragAndDrop extends React.PureComponent {
   }
 
   updateBackgroundMode(backgroundMode) {
-    if (backgroundMode === 0) {
-      logEvent('settings', 'Update Background: Scrumptious');
-    } else {
-      logEvent('settings', 'Update Background: Custom');
-    }
     this.props.setBackgroundMode(backgroundMode);
   }
 
