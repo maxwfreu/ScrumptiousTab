@@ -80,7 +80,7 @@ class AppModePanel extends React.PureComponent {
                 className={`surprise-me-wrapper ${backgroundMode === 0 ? 'active-bg' : ''}`}
                 onClick={this.setSurpriseMeMode}
               >
-                <div className="surprise-me">Suprise Me</div>
+                <div className="surprise-me">Surprise Me</div>
                 We choose a new background image <br/>for you every week
               </div>
               <div className="surprise-me-right">
