@@ -1,5 +1,4 @@
 import React from 'react';
-import { logEvent } from '../../utils';
 
 const SuggestionsPanel = () => (
   <div className="info-popup-inner">
@@ -29,7 +28,6 @@ const SuggestionsPanel = () => (
         href="https://scrumptioustab.com/buy-me-a-coffee"
         rel="noopener noreferrer"
         target="_blank"
-        onClick={() => logEvent('Suggestions Panel', 'Donate Now', 3)}
       >
         Donate Now
       </a>
@@ -45,21 +43,18 @@ const SuggestionsPanel = () => (
         <a
           href="https://www.instagram.com/scrumptioustab_/"
           rel="noopener noreferrer"
-          onClick={() => logEvent('Suggestions Panel', 'Instagram')}
           target="_blank"
           className="instagram-footer"
         />
         <a
           href="https://twitter.com/scrumptioustab"
           rel="noopener noreferrer"
-          onClick={() => logEvent('Suggestions Panel', 'Twitter')}
           target="_blank"
           className="twitter-footer"
         />
         <a
           href="https://www.facebook.com/Scrumptious-350923525519590/"
           rel="noopener noreferrer"
-          onClick={() => logEvent('Suggestions Panel', 'Facebook')}
           target="_blank"
           className="facebook-footer"
         />

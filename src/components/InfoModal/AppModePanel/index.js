@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logEvent } from '../../../utils';
 import { setAppMode, setBackgroundMode } from '../../Actions';
 import DragAndDrop from '../DragAndDrop';
 import SurpriseMeImage from './SurpriseMeImage';
@@ -15,19 +14,10 @@ class AppModePanel extends React.PureComponent {
     this.setDarkMode = this.setDarkMode.bind(this);
     this.setScrumptiousMode = this.setScrumptiousMode.bind(this);
     this.setSurpriseMeMode = this.setSurpriseMeMode.bind(this);
-  }
-
-  updateAppMode(appMode) {
-    logEvent('settings', `Update AppMode: ${appMode}`);
-    this.props.setAppMode(appMode);
+    this.updateBackgroundMode = this.updateBackgroundMode.bind(this);
   }
 
   updateBackgroundMode(backgroundMode) {
-    if (backgroundMode === 0) {
-      logEvent('settings', 'Update Background: Scrumptious');
-    } else {
-      logEvent('settings', 'Update Background: Custom');
-    }
     this.props.setBackgroundMode(backgroundMode);
   }
 
@@ -45,6 +35,10 @@ class AppModePanel extends React.PureComponent {
 
   setSurpriseMeMode() {
     this.updateBackgroundMode(0);
+  }
+
+  updateAppMode(appMode) {
+    this.props.setAppMode(appMode);
   }
 
   render() {
@@ -86,7 +80,7 @@ class AppModePanel extends React.PureComponent {
                 className={`surprise-me-wrapper ${backgroundMode === 0 ? 'active-bg' : ''}`}
                 onClick={this.setSurpriseMeMode}
               >
-                <div className="surprise-me">Suprise Me</div>
+                <div className="surprise-me">Surprise Me</div>
                 We choose a new background image <br/>for you every week
               </div>
               <div className="surprise-me-right">

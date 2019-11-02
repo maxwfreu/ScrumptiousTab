@@ -1,5 +1,3 @@
-import ReactGA from 'react-ga';
-
 export const getBooleanFromLocalStorage = (boolId) => {
   const boolToParse = window.localStorage.getItem(boolId, false);
   if (!boolToParse || boolToParse === null || boolToParse === 'false' || boolToParse === 'undefined') {
@@ -150,50 +148,6 @@ export const initialColumns = [
   { id: 'inprogress', title: 'Doing', emptyState: 'doing' },
   { id: 'done', title: 'Done', emptyState: 'done' },
 ];
-
-export const initGA = () => {
-  if (process.env.NODE_ENV === 'test') return;
-  ReactGA.initialize('UA-129584763-1', {
-    gaOptions: {
-      cookieDomain: 'none',
-    },
-  });
-  // enable ga
-  if (ga) {
-    ga('set', 'checkProtocolTask', function(){}); // Removes failing protocol check. @see: http://stackoverflow.com/a/22152353/1958200
-    ga('require', 'displayfeatures');
-  }
-};
-
-export const logPageView = () => {
-  if (process.env.NODE_ENV === 'test') return;
-  ReactGA.set({ page: window.location.pathname });
-  ReactGA.pageview(window.location.pathname);
-};
-
-export const logEvent = (category = '', action = '', value = null) => {
-  if (process.env.NODE_ENV === 'test') return;
-  if (category && action && value) {
-    ReactGA.event({ category, action, value });
-  } else if (category && action) {
-    ReactGA.event({ category, action });
-  }
-};
-
-export const logPageLoad = (value) => {
-  ReactGA.timing({
-    category: 'App',
-    variable: 'load',
-    value, // in milliseconds
-  });
-};
-
-export const logException = (description = '', fatal = false) => {
-  if (process.env.NODE_ENV === 'test') return;
-  if (description) {
-    ReactGA.exception({ description, fatal });
-  }
-};
 
 /*
   NOTE:

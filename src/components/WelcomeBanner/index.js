@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AutosizeInput from 'react-input-autosize';
 import { updateName, toggleMilitaryTime as toggleMilitaryTimeAction, toggleSHHMode } from '../Actions';
 import NewAlert from './NewAlert';
-import { logEvent, monthNames } from '../../utils';
+import { monthNames } from '../../utils';
 import '../../styles/WelcomeBanner.scss';
 import {
   toggleInfoModal as toggleInfoModalAction,
@@ -109,7 +109,6 @@ class WelcomeBanner extends PureComponent {
     Update users name. Used on blur
   */
   setName(ev) {
-    logEvent('settings', 'Update Name');
     const name = ev.target.value;
     if (!name && name.length === 0) {
       return;
@@ -147,7 +146,6 @@ class WelcomeBanner extends PureComponent {
   */
   showInfo(panelToShow=0) {
     const { toggleInfoModal } = this.props;
-    logEvent('click', 'Show Info');
     toggleInfoModal(false, panelToShow);
   }
 
@@ -182,20 +180,17 @@ class WelcomeBanner extends PureComponent {
     Switch time between standard and military
   */
   toggleTimeType() {
-    logEvent('settings', 'Toggle Time');
     const { toggleMilitaryTime } = this.props;
     toggleMilitaryTime();
   }
 
   toggleBackgroundMode() {
     const { toggleSHHMode: toggleSHHModeAction } = this.props;
-    logEvent('settings', 'Toggle Background Mode');
     toggleSHHModeAction(false);
   }
 
   toggleZENMODE() {
     const { toggleSHHMode: toggleSHHModeAction } = this.props;
-    logEvent('settings', 'Toggle Zen Mode');
     toggleSHHModeAction(true);
   }
 

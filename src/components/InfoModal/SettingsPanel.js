@@ -4,7 +4,7 @@ import Toggle from 'react-toggle';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toggleWobble, toggleBookMarks as toggleBookMarksAction, toggleWelcomeBanner, toggleScrumptious } from '../Actions';
-import { logEvent, initalizeBookMarks, getBooleanFromLocalStorage } from '../../utils';
+import { initalizeBookMarks, getBooleanFromLocalStorage } from '../../utils';
 import 'react-toggle/style.css';
 
 class SettingsPanel extends React.PureComponent {
@@ -34,11 +34,6 @@ class SettingsPanel extends React.PureComponent {
   }
 
   toggleDefaultTab(hideScrumptious) {
-    if (hideScrumptious) {
-      logEvent('settings', 'Show Kanban');
-    } else {
-      logEvent('settings', 'Hide Kanban');
-    }
     this.props.toggleScrumptious(hideScrumptious);
     if (hideScrumptious) {
       chrome.tabs.update({
@@ -49,30 +44,15 @@ class SettingsPanel extends React.PureComponent {
 
   toggleWobble(e) {
     const enableWobble = e.target.checked;
-    if (enableWobble) {
-      logEvent('settings', 'Enable Wobble');
-    } else {
-      logEvent('settings', 'Disable Wobble');
-    }
     this.props.toggleWobble();
   }
 
   toggleWelcomeBanner(e) {
     const enableWobble = e.target.checked;
-    if (enableWobble) {
-      logEvent('settings', 'Show Header');
-    } else {
-      logEvent('settings', 'Hide Header');
-    }
     this.props.toggleWelcomeBanner();
   }
 
   toggleBookMark(showBookMark) {
-    if (showBookMark) {
-      logEvent('settings', 'Show Bookmarks');
-    } else {
-      logEvent('settings', 'Hide Bookmarks');
-    }
     this.props.toggleBookMarksAction(showBookMark);
   }
 

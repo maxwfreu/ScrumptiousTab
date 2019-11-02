@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import NaturalDragAnimation from 'natural-drag-animation-rbdnd';
 import AutosizeInput from 'react-input-autosize';
-import { logEvent } from '../utils';
 import {
   updateColumnHeader,
   clearColumn,
@@ -82,14 +81,12 @@ class Column extends React.Component {
   }
 
   toggleMenu = () => {
-    logEvent('columns', 'Show Column Menu');
     this.setState(state => ({
       showDropDown: !state.showDropDown,
     }));
   }
 
   clearColumn = () => {
-    logEvent('columns', 'Clear Column');
     const { type, dispatchClearColumn } = this.props;
     dispatchClearColumn(type);
     this.setState({
@@ -98,7 +95,6 @@ class Column extends React.Component {
   }
 
   addColumn = () => {
-    logEvent('columns', 'Add Column');
     const { index, dispatchAddColumn } = this.props;
     dispatchAddColumn(index + 1);
     setTimeout(() => {
@@ -121,7 +117,6 @@ class Column extends React.Component {
   }
 
   removeColumn = () => {
-    logEvent('columns', 'Remove Column');
     const { index, type, dispatchRemoveColumn } = this.props;
     dispatchRemoveColumn(index, type);
     this.setState({
@@ -130,7 +125,6 @@ class Column extends React.Component {
   }
 
   archiveColumn = () => {
-    logEvent('columns', 'Archive Column');
     const { dispatchArchiveColumn } = this.props;
     dispatchArchiveColumn();
     this.setState({
@@ -144,14 +138,12 @@ class Column extends React.Component {
   }
 
   updateColumnHeaderBlur = (ev) => {
-    logEvent('columns', 'Update Column Header');
     const { type } = this.props;
     this.props.updateColumnHeader(type, ev.target.value || 'New Column');
   }
 
   addTask = () => {
     const { type, cardNumber } = this.props;
-    logEvent('tasks', 'Add Task', cardNumber);
     const id = uuidv4();
     this.props.addTask(id, type);
     this.adding = true;

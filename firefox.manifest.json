@@ -26,6 +26,5 @@
   "optional_permissions": [
     "bookmarks"
   ],
-  "offline_enabled": true,
-  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js; object-src 'self'"
+  "offline_enabled": true
 }
