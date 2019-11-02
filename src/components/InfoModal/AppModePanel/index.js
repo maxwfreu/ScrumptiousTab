@@ -14,10 +14,7 @@ class AppModePanel extends React.PureComponent {
     this.setDarkMode = this.setDarkMode.bind(this);
     this.setScrumptiousMode = this.setScrumptiousMode.bind(this);
     this.setSurpriseMeMode = this.setSurpriseMeMode.bind(this);
-  }
-
-  updateAppMode(appMode) {
-    this.props.setAppMode(appMode);
+    this.updateBackgroundMode = this.updateBackgroundMode.bind(this);
   }
 
   updateBackgroundMode(backgroundMode) {
@@ -38,6 +35,10 @@ class AppModePanel extends React.PureComponent {
 
   setSurpriseMeMode() {
     this.updateBackgroundMode(0);
+  }
+
+  updateAppMode(appMode) {
+    this.props.setAppMode(appMode);
   }
 
   render() {
