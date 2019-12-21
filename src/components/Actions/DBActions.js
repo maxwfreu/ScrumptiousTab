@@ -57,7 +57,7 @@ export const fetchScrumptiousData = () => (
       type: ScrumptiousConstants.SCRUMPTIOUS_DATA_FETCH,
     });
 
-    // True if we are loading the application for the first time.
+    // True if we are not loading the application for the first time.
     // TODO: Update this to check if we actually have tasks
     let introDataInitialized = getBooleanFromLocalStorage('introDataInitialized');
     // We are no longer compressing data, but for those who have old extensions

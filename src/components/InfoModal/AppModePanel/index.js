@@ -76,14 +76,7 @@ class AppModePanel extends React.PureComponent {
               </div>
             )}
             <div className="selectable-row">
-              <div
-                className={`surprise-me-wrapper ${backgroundMode === 0 ? 'active-bg' : ''}`}
-                onClick={this.setSurpriseMeMode}
-              >
-                <div className="surprise-me">Surprise Me</div>
-                We choose a new background image <br/>for you every week
-              </div>
-              <div className="surprise-me-right">
+              <div className="choose-images">
                 <SurpriseMeImage
                   alt="Hills"
                   backgroundMode={backgroundMode}
@@ -108,33 +101,31 @@ class AppModePanel extends React.PureComponent {
                   updateBackgroundMode={this.updateBackgroundMode}
                   imageId={4}
                 />
+                <SurpriseMeImage
+                  alt="Cabin"
+                  backgroundMode={backgroundMode}
+                  updateBackgroundMode={this.updateBackgroundMode}
+                  imageId={5}
+                />
+                <SurpriseMeImage
+                  alt="Beach"
+                  backgroundMode={backgroundMode}
+                  updateBackgroundMode={this.updateBackgroundMode}
+                  imageId={6}
+                />
+                <SurpriseMeImage
+                  alt="Dock"
+                  backgroundMode={backgroundMode}
+                  updateBackgroundMode={this.updateBackgroundMode}
+                  imageId={7}
+                />
+                <SurpriseMeImage
+                  alt="City"
+                  backgroundMode={backgroundMode}
+                  updateBackgroundMode={this.updateBackgroundMode}
+                  imageId={8}
+                />
               </div>
-            </div>
-            <div className="selectable-row">
-              <SurpriseMeImage
-                alt="Cabin"
-                backgroundMode={backgroundMode}
-                updateBackgroundMode={this.updateBackgroundMode}
-                imageId={5}
-              />
-              <SurpriseMeImage
-                alt="Beach"
-                backgroundMode={backgroundMode}
-                updateBackgroundMode={this.updateBackgroundMode}
-                imageId={6}
-              />
-              <SurpriseMeImage
-                alt="Dock"
-                backgroundMode={backgroundMode}
-                updateBackgroundMode={this.updateBackgroundMode}
-                imageId={7}
-              />
-              <SurpriseMeImage
-                alt="City"
-                backgroundMode={backgroundMode}
-                updateBackgroundMode={this.updateBackgroundMode}
-                imageId={8}
-              />
             </div>
           </div>
         </div>

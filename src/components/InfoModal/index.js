@@ -143,12 +143,6 @@ class InfoModal extends PureComponent {
               type="button"
               pose={showInfoModal ? 'show' : 'hide'}
             />
-            <MenuButton
-              className={`menu-btn contact-menu-btn ${activeTab === 4 ? 'active' : ''}`}
-              onClick={this.openSuggestionsPanel}
-              type="button"
-              pose={showInfoModal ? 'show' : 'hide'}
-            />
           </MenuPanel>
           <div className="info-popup-content-wrapper">
             {activeTab === 0 && (
@@ -162,9 +156,6 @@ class InfoModal extends PureComponent {
             )}
             {activeTab === 3 && (
               <SettingsPanel />
-            )}
-            {activeTab === 4 && (
-              <SuggestionsPanel />
             )}
           </div>
         </Panel>

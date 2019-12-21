@@ -247,7 +247,6 @@ class Main extends Component {
           <img
             src={bgURL}
             className={backgroundClasses}
-            alt="Scrumptious Background"
           />
         )}
         {appMode !== 100 && (
