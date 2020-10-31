@@ -18,6 +18,7 @@ A chrome extension that turns your new tab into a kanban board!
 
 ## Getting started
 1. `npm i`
+  - Requires Node 15 or greater
 2. `npm start`
 3. Visit [localhost:8080](https://localhost:8080)
 

@@ -101,53 +101,5 @@ describe('<CardOptions />', () => {
         taskId: 'b277baf7-f384-4d67-bc29-badbb9abd931',
       }]);
     });
-
-    it('updates active label override', () => {
-      const wrapper = mount(
-        <ReactRedux.Provider store={store}>
-          <CardOptions
-            setLabelRef={() => null}
-            deleteTask={() => null}
-            selectLabel={() => null}
-            pickLabel={false}
-            toggleLabel={() => null}
-            columnId={columnType}
-            taskId={taskID}
-            addLabel={() => null}
-            isDeleteConfirmed={false}
-          />
-        </ReactRedux.Provider>,
-      );
-      wrapper.setState({
-        activeLabelOverride: true,
-      });
-      expect(wrapper.state('activeLabelOverride')).to.equal(true);
-    });
-
-    it('updates active label override', () => {
-      const wrapper = mount(
-        <ReactRedux.Provider store={store}>
-          <CardOptions
-            setLabelRef={() => null}
-            deleteTask={() => null}
-            selectLabel={() => null}
-            pickLabel={false}
-            toggleLabel={() => null}
-            columnId={columnType}
-            taskId={taskID}
-            addLabel={() => null}
-            isDeleteConfirmed={false}
-          />
-        </ReactRedux.Provider>,
-      );
-      const prevLabelOptions = Object.assign({}, labelOptions);
-      delete prevLabelOptions['low-priority'];
-      const instance = wrapper.find('CardOptions').instance();
-      instance.componentDidUpdate({
-        labelOptions: prevLabelOptions,
-      });
-      // TODO: verify activeLabelOverride is set correctly
-      expect(wrapper.state('activeLabelOverride')).to.equal(undefined);
-    });
   });
 });
